@@ -162,7 +162,7 @@
           "tags": [
             "Home"
           ],
-          "summary": "Получение списка правил программы",
+          "summary": "Получение списка правил программы.",
           "operationId": "programRules",
           "responses": {
             "200": {
@@ -189,12 +189,12 @@
           }
         }
       },
-      "/api/v1/register": {
+      "/api/v1/register/": {
         "post": {
           "tags": [
             "User"
           ],
-          "summary": "Регистрация пользователя",
+          "summary": "Регистрация пользователя.",
           "operationId": "registerUser",
           "requestBody": {
             "required": true,
