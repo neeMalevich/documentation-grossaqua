@@ -1,0 +1,211 @@
+openapi: 3.0.0
+info:
+  title: API Grossaqua
+  version: '1.0'
+paths:
+  /api/v1/get/countries/:
+    get:
+      tags:
+        - Region
+      summary: Получение списка стран.
+      operationId: 35bd7e1f0b3f2ad3ddd1fa5790f6f0b1
+      responses:
+        '200':
+          description: Успешно выполненно!
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    ID:
+                      type: integer
+                    NAME:
+                      type: string
+                  type: object
+  /api/v1/get/regions/:
+    get:
+      tags:
+        - Region
+      summary: Получение списка регионов страны.
+      operationId: c5592785f01415952181198b027171c1
+      parameters:
+        - name: country
+          in: query
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Успешно выполненно!
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    ID:
+                      type: integer
+                    NAME:
+                      type: string
+                  type: object
+  /api/v1/get/cities/:
+    get:
+      tags:
+        - Region
+      summary: Получение списка городов региона.
+      operationId: 31c06e2089895b3b608c7002dbc336bf
+      parameters:
+        - name: region
+          in: query
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Успешно выполненно!
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    NAME:
+                      type: string
+                  type: object
+    
+  /api/v1/home/get_steps/:
+    get:
+      tags:
+        - Home
+      summary: Получение списка шагов на главном экране
+      operationId: stepsHome
+      responses:
+        '200':
+          description: Успешно выполненно!
+          content:
+            application/json:    
+              schema:
+                type: array
+                items:
+                  properties:
+                    ID:
+                      type: integer
+                    NAME: 
+                      type: string
+                    PREVIEW_PICTURE:
+                      type: string
+                      format: binary
+                    PREVIEW_TEXT:
+                      type: string
+                  type: object
+
+  /api/v1/home/program_rules/:
+    get:
+      tags: 
+        - Home
+      summary: Получение списка правил программы
+      operationId: programRules
+      responses:
+        '200':
+          description: Успешно выполненно!
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    ID:
+                      type: integer
+                    PREVIEW_TEXT:
+                      type: string
+                  type: object
+  /api/v1/register:
+    post:
+      tags:
+        - User
+      summary: Регистрация пользователя
+      operationId: registerUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+      responses:
+        '200':
+          description: Пользователь успешно зарегистрирован
+        '400':
+          description: Ошибка валидации
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '500':
+          description: Ошибка регистрации
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              
+components:
+  schemas:
+    RegisterRequest:
+      type: object
+      required:
+        - name
+        - surname
+        - patronymic
+        - email
+        - phone
+        - country
+        - region
+        - city
+        - shop_address
+        - shop_name
+        - password
+        - confirm_password
+      properties:
+        name:
+          type: string
+        surname:
+          type: string  
+        patronymic:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        country:
+          type: string
+        region:
+          type: string
+        city:
+          type: string
+        shop_address:
+          type: string
+        shop_name:
+          type: string
+        password:
+          type: string
+        confirm_password:
+          type: string
+          
+    ValidationError:
+      type: object
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+          
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+
+tags:
+  - name: Region
+  - name: Home
+  - name: User
