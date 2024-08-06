@@ -189,7 +189,7 @@
           }
         }
       },
-      "/api/v1/register/": {
+      "/api/v1/auth/register/": {
         "post": {
           "tags": [
             "User"
@@ -222,6 +222,283 @@
             },
             "500": {
               "description": "Ошибка регистрации",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ErrorResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/auth/login_by_email/": {
+        "post": {
+          "tags": [
+            "User"
+          ],
+          "summary": "Авторизация пользователя по email.",
+          "operationId": "loginByEmail",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthLoginByEmailRequest"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Пользователь успешно авторизован."
+            },
+            "400": {
+              "description": "Ошибка валидации",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ValidationMessageError"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Ошибка входа в аккаунт",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ErrorResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/auth/logout/": {
+        "post": {
+          "tags": [
+            "User"
+          ],
+          "summary": "Выход из аккаунта пользователя.",
+          "operationId": "logout",
+          "responses": {
+            "200": {
+              "description": "Пользователь успешно вышел"
+            },
+            "500": {
+              "description": "Ошибка выхода из аккаунта",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ErrorResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/auth/login_by_phone/": {
+        "post": {
+          "tags": [
+            "User"
+          ],
+          "summary": "Авторизация пользователя по номеру телефона.",
+          "operationId": "loginByPhone",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loginByPhoneRequest"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Код успешно отправлен"
+            },
+            "400": {
+              "description": "Ошибка валидации",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ValidationError"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Пользователь с таким номером телефона не найден"
+            },
+            "500": {
+              "description": "Ошибка отправки кода",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ErrorResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/auth/check_login_phone_code/": {
+        "post": {
+          "tags": [
+            "User"
+          ],
+          "summary": "Подтверждение кода для авторизации по номеру телефона.",
+          "operationId": "checkLoginPhoneCode",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/checkRecoveryCodeEmailRequest"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Авторизация прошла успешно"
+            },
+            "400": {
+              "description": "Ошибка валидации",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ValidationError"
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Неверный код"
+            },
+            "500": {
+              "description": "Ошибка авторизации",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ErrorResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/auth/send_recovery_code_to_email/": {
+        "post": {
+          "tags": [
+            "User"
+          ],
+          "summary": "Отправка кода на Email для восстановление пароля.",
+          "operationId": "sendRecoveryCodeToEmail",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/sendRecoveryCodeToEmailRequest"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Email успешно отправлен"
+            },
+            "500": {
+              "description": "Ошибка отправки Email",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ErrorResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/auth/check_recovery_code_in_email/": {
+        "post": {
+          "tags": [
+            "User"
+          ],
+          "summary": "Подтверждение кода для восстановление пароля.",
+          "operationId": "checkRecoveryCodeEmail",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/checkRecoveryCodeEmailRequest"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Код прошёл успешно"
+            },
+            "401": {
+              "description": "Неверный код"
+            },
+            "500": {
+              "description": "Ошибка при подтверждение пароля",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ErrorResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/auth/change_password/": {
+        "post": {
+          "tags": [
+            "User"
+          ],
+          "summary": "Изменение пароля пользователя.",
+          "operationId": "changePassword",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChangePasswordRequest"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Пользователь успешно сменил пароль"
+            },
+            "400": {
+              "description": "Ошибка валидации",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ValidationError"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Ошибка при смене пароля",
               "content": {
                 "application/json": {
                   "schema": {
@@ -291,11 +568,85 @@
             }
           }
         },
+        "AuthLoginByEmailRequest": {
+          "type": "object",
+          "required": [
+            "email",
+            "password"
+          ],
+          "properties": {
+            "email": {
+              "type": "string"
+            },
+            "password": {
+              "type": "string"
+            }
+          }
+        },
+        "ChangePasswordRequest": {
+          "type": "object",
+          "required": [
+            "password",
+            "confirm_password"
+          ],
+          "properties": {
+            "password": {
+              "type": "string"
+            },
+            "confirm_password": {
+              "type": "string"
+            }
+          }
+        },
+        "loginByPhoneRequest": {
+          "type": "object",
+          "required": [
+            "phone"
+          ],
+          "properties": {
+            "phone": {
+              "type": "string"
+            }
+          }
+        },
+        "sendRecoveryCodeToEmailRequest": {
+          "type": "object",
+          "required": [
+            "email"
+          ],
+          "properties": {
+            "email": {
+              "type": "string"
+            }
+          }
+        },
+        "checkRecoveryCodeEmailRequest": {
+          "type": "object",
+          "required": [
+            "code"
+          ],
+          "properties": {
+            "code": {
+              "type": "string"
+            }
+          }
+        },
         "ValidationError": {
           "type": "object",
           "properties": {
             "field": {
               "type": "string"
+            },
+            "message": {
+              "type": "string"
+            }
+          }
+        },
+        "ValidationMessageError": {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "boolean"
             },
             "message": {
               "type": "string"
