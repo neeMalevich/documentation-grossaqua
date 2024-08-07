@@ -1,33 +1,32 @@
 {
-    "openapi": "3.0.0",
-    "info": {
-      "title": "API Grossaqua",
-      "version": "1.0"
-    },
-    "paths": {
-      "/api/v1/get/countries/": {
-        "get": {
-          "tags": [
-            "Region"
-          ],
-          "summary": "Получение списка стран.",
-          "operationId": "35bd7e1f0b3f2ad3ddd1fa5790f6f0b1",
-          "responses": {
-            "200": {
-              "description": "Успешно выполненно!",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "ID": {
-                          "type": "integer"
-                        },
-                        "NAME": {
-                          "type": "string"
-                        }
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API Grossaqua",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/v1/get/countries/": {
+      "get": {
+        "tags": [
+          "Region"
+        ],
+        "summary": "Получение списка стран.",
+        "operationId": "35bd7e1f0b3f2ad3ddd1fa5790f6f0b1",
+        "responses": {
+          "200": {
+            "description": "Успешно выполненно!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "name": {
+                        "type": "string"
                       }
                     }
                   }
@@ -36,473 +35,548 @@
             }
           }
         }
-      },
-      "/api/v1/get/regions/": {
-        "get": {
-          "tags": [
-            "Region"
-          ],
-          "summary": "Получение списка регионов страны.",
-          "operationId": "c5592785f01415952181198b027171c1",
-          "parameters": [
-            {
-              "name": "country",
-              "in": "query",
-              "required": true,
+      }
+    },
+    "/api/v1/get/regions/": {
+      "get": {
+        "tags": [
+          "Region"
+        ],
+        "summary": "Получение списка регионов страны.",
+        "operationId": "c5592785f01415952181198b027171c1",
+        "parameters": [
+          {
+            "name": "country",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешно выполненно!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "name": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/get/cities/": {
+      "get": {
+        "tags": [
+          "Region"
+        ],
+        "summary": "Получение списка городов региона.",
+        "operationId": "31c06e2089895b3b608c7002dbc336bf",
+        "parameters": [
+          {
+            "name": "region",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешно выполненно!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/home/get_steps/": {
+      "get": {
+        "tags": [
+          "Home"
+        ],
+        "summary": "Получение списка шагов на главном экране",
+        "operationId": "stepsHome",
+        "responses": {
+          "200": {
+            "description": "Успешно выполненно!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "preview_picture": {
+                        "type": "string",
+                        "format": "binary"
+                      },
+                      "preview_text": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/home/program_rules/": {
+      "get": {
+        "tags": [
+          "Home"
+        ],
+        "summary": "Получение списка правил программы.",
+        "operationId": "programRules",
+        "responses": {
+          "200": {
+            "description": "Успешно выполненно!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "preview_text": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/register/": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Регистрация пользователя.",
+        "operationId": "registerUser",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
               "schema": {
-                "type": "integer"
+                "$ref": "#/components/schemas/RegisterRequest"
               }
             }
-          ],
-          "responses": {
-            "200": {
-              "description": "Успешно выполненно!",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "ID": {
-                          "type": "integer"
-                        },
-                        "NAME": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Пользователь успешно зарегистрирован"
+          },
+          "400": {
+            "description": "Ошибка валидации",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Ошибка регистрации",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         }
-      },
-      "/api/v1/get/cities/": {
-        "get": {
-          "tags": [
-            "Region"
-          ],
-          "summary": "Получение списка городов региона.",
-          "operationId": "31c06e2089895b3b608c7002dbc336bf",
-          "parameters": [
-            {
-              "name": "region",
-              "in": "query",
-              "required": true,
+      }
+    },
+    "/api/v1/auth/login_by_email/": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Авторизация пользователя по email.",
+        "operationId": "loginByEmail",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
               "schema": {
-                "type": "integer"
+                "$ref": "#/components/schemas/AuthLoginByEmailRequest"
               }
             }
-          ],
-          "responses": {
-            "200": {
-              "description": "Успешно выполненно!",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "NAME": {
-                          "type": "string"
-                        }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Пользователь успешно авторизован."
+          },
+          "400": {
+            "description": "Ошибка валидации",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Ошибка входа в аккаунт",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/logout/": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Выход из аккаунта пользователя.",
+        "operationId": "logout",
+        "responses": {
+          "200": {
+            "description": "Пользователь успешно вышел"
+          },
+          "500": {
+            "description": "Ошибка выхода из аккаунта",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/login_by_phone/": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Авторизация пользователя по номеру телефона.",
+        "operationId": "loginByPhone",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/loginByPhoneRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Код успешно отправлен"
+          },
+          "400": {
+            "description": "Ошибка валидации",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Пользователь с таким номером телефона не найден"
+          },
+          "500": {
+            "description": "Ошибка отправки кода",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/check_login_phone_code/": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Подтверждение кода для авторизации по номеру телефона.",
+        "operationId": "checkLoginPhoneCode",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/checkRecoveryCodeEmailRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Авторизация прошла успешно"
+          },
+          "400": {
+            "description": "Ошибка валидации",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Неверный код"
+          },
+          "500": {
+            "description": "Ошибка авторизации",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/send_recovery_code_to_email/": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Отправка кода на Email для восстановление пароля.",
+        "operationId": "sendRecoveryCodeToEmail",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/sendRecoveryCodeToEmailRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Email успешно отправлен"
+          },
+          "500": {
+            "description": "Ошибка отправки Email",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/check_recovery_code_in_email/": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Подтверждение кода для восстановление пароля.",
+        "operationId": "checkRecoveryCodeEmail",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/checkRecoveryCodeEmailRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Код прошёл успешно"
+          },
+          "401": {
+            "description": "Неверный код"
+          },
+          "500": {
+            "description": "Ошибка при подтверждение пароля",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/change_password/": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Изменение пароля пользователя.",
+        "operationId": "changePassword",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangePasswordRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Пользователь успешно сменил пароль"
+          },
+          "400": {
+            "description": "Ошибка валидации",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Ошибка при смене пароля",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/promocode/activate/": {
+      "post": {
+        "tags": [
+          "Promocode"
+        ],
+        "summary": "Активация промокодов.",
+        "operationId": "activeCode",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/activePromocodeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Промо-кода был активирован"
+          },
+          "400": {
+            "description": "Ошибка активации промокода",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/catalog/list/": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "summary": "Получение списка сертификатов.",
+        "operationId": "getCertificates",
+        "responses": {
+          "200": {
+            "description": "Успешно выполнено!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "price": {
+                        "type": "integer"
+                      },
+                      "image": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "text": {
+                        "type": "string"
                       }
                     }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/api/v1/home/get_steps/": {
-        "get": {
-          "tags": [
-            "Home"
-          ],
-          "summary": "Получение списка шагов на главном экране",
-          "operationId": "stepsHome",
-          "responses": {
-            "200": {
-              "description": "Успешно выполненно!",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "ID": {
-                          "type": "integer"
-                        },
-                        "NAME": {
-                          "type": "string"
-                        },
-                        "PREVIEW_PICTURE": {
-                          "type": "string",
-                          "format": "binary"
-                        },
-                        "PREVIEW_TEXT": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/api/v1/home/program_rules/": {
-        "get": {
-          "tags": [
-            "Home"
-          ],
-          "summary": "Получение списка правил программы.",
-          "operationId": "programRules",
-          "responses": {
-            "200": {
-              "description": "Успешно выполненно!",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "ID": {
-                          "type": "integer"
-                        },
-                        "PREVIEW_TEXT": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/api/v1/auth/register/": {
-        "post": {
-          "tags": [
-            "User"
-          ],
-          "summary": "Регистрация пользователя.",
-          "operationId": "registerUser",
-          "requestBody": {
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RegisterRequest"
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "Пользователь успешно зарегистрирован"
-            },
-            "400": {
-              "description": "Ошибка валидации",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/ValidationError"
-                  }
-                }
-              }
-            },
-            "500": {
-              "description": "Ошибка регистрации",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/ErrorResponse"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/api/v1/auth/login_by_email/": {
-        "post": {
-          "tags": [
-            "User"
-          ],
-          "summary": "Авторизация пользователя по email.",
-          "operationId": "loginByEmail",
-          "requestBody": {
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AuthLoginByEmailRequest"
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "Пользователь успешно авторизован."
-            },
-            "400": {
-              "description": "Ошибка валидации",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/ValidationMessageError"
-                  }
-                }
-              }
-            },
-            "500": {
-              "description": "Ошибка входа в аккаунт",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/ErrorResponse"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/api/v1/auth/logout/": {
-        "post": {
-          "tags": [
-            "User"
-          ],
-          "summary": "Выход из аккаунта пользователя.",
-          "operationId": "logout",
-          "responses": {
-            "200": {
-              "description": "Пользователь успешно вышел"
-            },
-            "500": {
-              "description": "Ошибка выхода из аккаунта",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/ErrorResponse"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/api/v1/auth/login_by_phone/": {
-        "post": {
-          "tags": [
-            "User"
-          ],
-          "summary": "Авторизация пользователя по номеру телефона.",
-          "operationId": "loginByPhone",
-          "requestBody": {
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/loginByPhoneRequest"
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "Код успешно отправлен"
-            },
-            "400": {
-              "description": "Ошибка валидации",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/ValidationError"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "Пользователь с таким номером телефона не найден"
-            },
-            "500": {
-              "description": "Ошибка отправки кода",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/ErrorResponse"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/api/v1/auth/check_login_phone_code/": {
-        "post": {
-          "tags": [
-            "User"
-          ],
-          "summary": "Подтверждение кода для авторизации по номеру телефона.",
-          "operationId": "checkLoginPhoneCode",
-          "requestBody": {
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/checkRecoveryCodeEmailRequest"
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "Авторизация прошла успешно"
-            },
-            "400": {
-              "description": "Ошибка валидации",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/ValidationError"
-                  }
-                }
-              }
-            },
-            "401": {
-              "description": "Неверный код"
-            },
-            "500": {
-              "description": "Ошибка авторизации",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/ErrorResponse"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/api/v1/auth/send_recovery_code_to_email/": {
-        "post": {
-          "tags": [
-            "User"
-          ],
-          "summary": "Отправка кода на Email для восстановление пароля.",
-          "operationId": "sendRecoveryCodeToEmail",
-          "requestBody": {
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/sendRecoveryCodeToEmailRequest"
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "Email успешно отправлен"
-            },
-            "500": {
-              "description": "Ошибка отправки Email",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/ErrorResponse"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/api/v1/auth/check_recovery_code_in_email/": {
-        "post": {
-          "tags": [
-            "User"
-          ],
-          "summary": "Подтверждение кода для восстановление пароля.",
-          "operationId": "checkRecoveryCodeEmail",
-          "requestBody": {
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/checkRecoveryCodeEmailRequest"
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "Код прошёл успешно"
-            },
-            "401": {
-              "description": "Неверный код"
-            },
-            "500": {
-              "description": "Ошибка при подтверждение пароля",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/ErrorResponse"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/api/v1/auth/change_password/": {
-        "post": {
-          "tags": [
-            "User"
-          ],
-          "summary": "Изменение пароля пользователя.",
-          "operationId": "changePassword",
-          "requestBody": {
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ChangePasswordRequest"
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "Пользователь успешно сменил пароль"
-            },
-            "400": {
-              "description": "Ошибка валидации",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/ValidationError"
-                  }
-                }
-              }
-            },
-            "500": {
-              "description": "Ошибка при смене пароля",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/ErrorResponse"
                   }
                 }
               }
@@ -511,167 +585,386 @@
         }
       }
     },
-    "components": {
-      "schemas": {
-        "RegisterRequest": {
-          "type": "object",
-          "required": [
-            "name",
-            "surname",
-            "patronymic",
-            "email",
-            "phone",
-            "country",
-            "region",
-            "city",
-            "shop_address",
-            "shop_name",
-            "password",
-            "confirm_password"
-          ],
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "surname": {
-              "type": "string"
-            },
-            "patronymic": {
-              "type": "string"
-            },
-            "email": {
-              "type": "string"
-            },
-            "phone": {
-              "type": "string"
-            },
-            "country": {
-              "type": "string"
-            },
-            "region": {
-              "type": "string"
-            },
-            "city": {
-              "type": "string"
-            },
-            "shop_address": {
-              "type": "string"
-            },
-            "shop_name": {
-              "type": "string"
-            },
-            "password": {
-              "type": "string"
-            },
-            "confirm_password": {
-              "type": "string"
+    "/api/v1/catalog/list/{id}": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "summary": "Получение детальной информации сертификата.",
+        "operationId": "getCertificatElementById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
             }
           }
-        },
-        "AuthLoginByEmailRequest": {
-          "type": "object",
-          "required": [
-            "email",
-            "password"
-          ],
-          "properties": {
-            "email": {
-              "type": "string"
-            },
-            "password": {
-              "type": "string"
-            }
-          }
-        },
-        "ChangePasswordRequest": {
-          "type": "object",
-          "required": [
-            "password",
-            "confirm_password"
-          ],
-          "properties": {
-            "password": {
-              "type": "string"
-            },
-            "confirm_password": {
-              "type": "string"
-            }
-          }
-        },
-        "loginByPhoneRequest": {
-          "type": "object",
-          "required": [
-            "phone"
-          ],
-          "properties": {
-            "phone": {
-              "type": "string"
-            }
-          }
-        },
-        "sendRecoveryCodeToEmailRequest": {
-          "type": "object",
-          "required": [
-            "email"
-          ],
-          "properties": {
-            "email": {
-              "type": "string"
-            }
-          }
-        },
-        "checkRecoveryCodeEmailRequest": {
-          "type": "object",
-          "required": [
-            "code"
-          ],
-          "properties": {
-            "code": {
-              "type": "string"
-            }
-          }
-        },
-        "ValidationError": {
-          "type": "object",
-          "properties": {
-            "field": {
-              "type": "string"
-            },
-            "message": {
-              "type": "string"
-            }
-          }
-        },
-        "ValidationMessageError": {
-          "type": "object",
-          "properties": {
-            "error": {
-              "type": "boolean"
-            },
-            "message": {
-              "type": "string"
-            }
-          }
-        },
-        "ErrorResponse": {
-          "type": "object",
-          "properties": {
-            "error": {
-              "type": "string"
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешно выполнено!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "price": {
+                        "type": "integer"
+                      },
+                      "image": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "text": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         }
       }
     },
-    "tags": [
-      {
-        "name": "Region"
-      },
-      {
-        "name": "Home"
-      },
-      {
-        "name": "User"
+    "/api/v1/catalog/element/order/{sum}": {
+      "post": {
+        "tags": [
+          "Catalog"
+        ],
+        "summary": "Получение денежного приза",
+        "operationId": "orderCashPrize",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "sum",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true,
+            "description": "Сумма денежного приза, которую пользователь хочет заказать"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "amount": {
+                    "type": "integer",
+                    "description": "Сумма денежного приза, которую пользователь хочет заказать",
+                    "minimum": 1000,
+                    "maximum": 20000
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Успешно выполнено",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Успешно выполнено"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Сумма должна быть от 1000 до 20000",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Сумма должна быть от 1000 до 20000"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
-    ]
-  }
+    },
+    "/api/v1/catalog/element/order/{id}": {
+      "post": {
+        "tags": [
+          "Catalog"
+        ],
+        "summary": "Заказ сертификата",
+        "operationId": "orderCertificate",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "ID сертификата"
+                  },
+                  "count": {
+                    "type": "integer",
+                    "description": "Количество сертификатов (по умолчанию 1)"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Успешно выполнено",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Успешно выполнено"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Недостаточно баллов на счету",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Недостаточно баллов на счету"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Сертификат не найден",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Сертификат не найден"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "RegisterRequest": {
+        "type": "object",
+        "required": [
+          "name",
+          "surname",
+          "patronymic",
+          "email",
+          "phone",
+          "country",
+          "region",
+          "city",
+          "shop_address",
+          "shop_name",
+          "password",
+          "confirm_password"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "surname": {
+            "type": "string"
+          },
+          "patronymic": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "region": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "shop_address": {
+            "type": "string"
+          },
+          "shop_name": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "confirm_password": {
+            "type": "string"
+          }
+        }
+      },
+      "AuthLoginByEmailRequest": {
+        "type": "object",
+        "required": [
+          "email",
+          "password"
+        ],
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "ChangePasswordRequest": {
+        "type": "object",
+        "required": [
+          "password",
+          "confirm_password"
+        ],
+        "properties": {
+          "password": {
+            "type": "string"
+          },
+          "confirm_password": {
+            "type": "string"
+          }
+        }
+      },
+      "loginByPhoneRequest": {
+        "type": "object",
+        "required": [
+          "phone"
+        ],
+        "properties": {
+          "phone": {
+            "type": "string"
+          }
+        }
+      },
+      "sendRecoveryCodeToEmailRequest": {
+        "type": "object",
+        "required": [
+          "email"
+        ],
+        "properties": {
+          "email": {
+            "type": "string"
+          }
+        }
+      },
+      "checkRecoveryCodeEmailRequest": {
+        "type": "object",
+        "required": [
+          "code"
+        ],
+        "properties": {
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "activePromocodeRequest": {
+        "type": "object",
+        "required": [
+          "code"
+        ],
+        "properties": {
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "ValidationError": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Region"
+    },
+    {
+      "name": "Home"
+    },
+    {
+      "name": "User"
+    },
+    {
+      "name": "Promocode"
+    },
+    {
+      "name": "Catalog"
+    }
+  ]
+}
