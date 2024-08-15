@@ -796,6 +796,514 @@
           }
         }
       }
+    },
+    "/api/v1/user/get_user_info/": {
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Получение информации о пользователе.",
+        "operationId": "getUserInfo",
+        "responses": {
+          "200": {
+            "description": "Успешно выполненно!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "surname": {
+                      "type": "string"
+                    },
+                    "patronymic": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "avatar": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "gender": {
+                      "type": "string"
+                    },
+                    "birthDate": {
+                      "type": "string",
+                      "format": "date"
+                    },
+                    "contactInfo": {
+                      "type": "object",
+                      "properties": {
+                        "phone": {
+                          "type": "string"
+                        },
+                        "address": {
+                          "type": "object",
+                          "properties": {
+                            "country": {
+                              "type": "string"
+                            },
+                            "region": {
+                              "type": "string"
+                            },
+                            "city": {
+                              "type": "string"
+                            },
+                            "zip": {
+                              "type": "integer"
+                            },
+                            "street": {
+                              "type": "string"
+                            },
+                            "house": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "apartment": {
+                              "type": "string",
+                              "nullable": true
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "storeInfo": {
+                      "type": "object",
+                      "properties": {
+                        "country": {
+                          "type": "string"
+                        },
+                        "region": {
+                          "type": "string"
+                        },
+                        "city": {
+                          "type": "string"
+                        },
+                        "address": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/get_point/": {
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Получение баллов аккаунта пользователя.",
+        "operationId": "getUserPointPromocode",
+        "responses": {
+          "200": {
+            "description": "Успешно выполненно!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "points": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/get_transactions/": {
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Получение активных транзакций пользователя.",
+        "operationId": "getUserTransactionsPromocode",
+        "responses": {
+          "200": {
+            "description": "Успешно выполненно!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer"
+                          },
+                          "type": {
+                            "type": "string",
+                            "enum": [
+                              "scan",
+                              "certificate",
+                              "cashprize"
+                            ]
+                          },
+                          "date": {
+                            "type": "string",
+                            "format": "date"
+                          },
+                          "amount": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/get_passport_data/": {
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Получение данных паспорта пользователя.",
+        "operationId": "getPassportData",
+        "responses": {
+          "200": {
+            "description": "Успешно выполнено!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "surname": {
+                          "type": "string"
+                        },
+                        "patronymic": {
+                          "type": "string"
+                        },
+                        "birthPlace": {
+                          "type": "string"
+                        },
+                        "gender": {
+                          "type": "string"
+                        },
+                        "birthDate": {
+                          "type": "string",
+                          "format": "date"
+                        },
+                        "passportNumber": {
+                          "type": "string"
+                        },
+                        "issuedBy": {
+                          "type": "string"
+                        },
+                        "departamentCode": {
+                          "type": "string"
+                        },
+                        "issueDate": {
+                          "type": "string",
+                          "format": "date"
+                        },
+                        "registrationAddress": {
+                          "type": "string"
+                        },
+                        "imagesPassport": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/update_passport_data/": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Обновление данных паспорта пользователя.",
+        "operationId": "updatePassportData",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "surname": {
+                    "type": "string"
+                  },
+                  "patronymic": {
+                    "type": "string"
+                  },
+                  "birthPlace": {
+                    "type": "string"
+                  },
+                  "gender": {
+                    "type": "string",
+                    "enum": [
+                      "M",
+                      "F"
+                    ]
+                  },
+                  "birthDate": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "passportNumber": {
+                    "type": "string"
+                  },
+                  "issuedBy": {
+                    "type": "string"
+                  },
+                  "departamentCode": {
+                    "type": "string"
+                  },
+                  "issueDate": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "registrationAddress": {
+                    "type": "string"
+                  },
+                  "imagesPassport": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Успешно выполнено!"
+          }
+        }
+      }
+    },
+    "/api/v1/user/get_snils_inn/": {
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Получение данных СНИЛС и ИНН пользователя.",
+        "operationId": "getSnilsInn",
+        "responses": {
+          "200": {
+            "description": "Успешно выполнено!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "snils": {
+                          "type": "string"
+                        },
+                        "inn": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/update_snils_inn/": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Обновление данных СНИЛС и ИНН пользователя.",
+        "operationId": "updateSnilsInn",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "snils": {
+                    "type": "string"
+                  },
+                  "inn": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Успешно выполнено!"
+          }
+        }
+      }
+    },
+    "/api/v1/user/get_bank_card/": {
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Получение данных банковской карты пользователя.",
+        "operationId": "getBankCard",
+        "responses": {
+          "200": {
+            "description": "Успешно выполнено!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "surname": {
+                          "type": "string"
+                        },
+                        "patronymic": {
+                          "type": "string"
+                        },
+                        "accountNumber": {
+                          "type": "string"
+                        },
+                        "bankOpen": {
+                          "type": "string",
+                          "format": "date"
+                        },
+                        "correspondent": {
+                          "type": "string"
+                        },
+                        "bankBic": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/update_bank_card/": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Обновление данных банковской карты пользователя.",
+        "operationId": "updateBankCard",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "surname": {
+                    "type": "string"
+                  },
+                  "patronymic": {
+                    "type": "string"
+                  },
+                  "accountNumber": {
+                    "type": "string"
+                  },
+                  "bankOpen": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "correspondent": {
+                    "type": "string"
+                  },
+                  "bankBic": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Успешно выполнено!"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -965,6 +1473,9 @@
     },
     {
       "name": "Catalog"
+    },
+    {
+      "name": "Account"
     }
   ]
 }
