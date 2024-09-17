@@ -636,7 +636,7 @@
         }
       }
     },
-    "/api/v1/catalog/element/order/{sum}": {
+    "/api/v1/catalog/element/order_sum/": {
       "post": {
         "tags": [
           "Catalog"
@@ -708,7 +708,7 @@
         }
       }
     },
-    "/api/v1/catalog/element/order/{id}": {
+    "/api/v1/catalog/element/order/": {
       "post": {
         "tags": [
           "Catalog"
